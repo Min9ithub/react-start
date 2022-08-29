@@ -1,21 +1,24 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./routes/Home";
-import Detail from "./routes/Detail";
+import { useState, useEffect } from "react";
+
 function App() {
+  const [counter, setValue] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const onClick = () => setValue((prev) => prev + 1);
+  const onChange = (event) => setKeyword(event.target.value);
+  useEffect(() => {
+    console.log("CALL THE API...");
+  }, []);
   return (
-    <Router>
-      <Switch>
-        <Route path="/hello">
-          <h1>Hello</h1>
-        </Route>
-        <Route path="/movie/:id">
-          <Detail />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      <input
+        value={keyword}
+        onChange={onChange}
+        type="text"
+        placeholder="Search here..."
+      />
+      <h1>{counter}</h1>
+      <button onClick={onClick}>click me</button>
+    </div>
   );
 }
 
